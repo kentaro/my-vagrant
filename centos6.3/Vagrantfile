@@ -14,9 +14,8 @@ Vagrant::Config.run do |config|
     # puppet.options        = %w[ --libdir=\\$modulepath/rbenv/lib ]
   end
 
-  # Path to puppet/chef manifests
+  # Path to puppet manifests
   config.vm.share_folder "puppet", "/etc/puppet", "../../vagrant-puppet"
-  config.vm.share_folder "chef",   "/etc/chef",   "../../vagrant-chef"
 
   config.vm.network :hostonly, "192.168.33.10"
   config.vm.network :bridged

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rm -rf ../vagrant-puppet
+ln -s $1 ../vagrant-puppet
