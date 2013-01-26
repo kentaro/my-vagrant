@@ -15,7 +15,7 @@ Vagrant::Config.run do |config|
   end
 
   # Path to puppet manifests
-  config.vm.share_folder "puppet", "/etc/puppet/manifests", "../../vagrant-puppet"
+  config.vm.share_folder "puppet", "/etc/puppet/shared", "../../vagrant-puppet"
 
   config.vm.network :hostonly, "192.168.33.10"
   config.vm.network :bridged
