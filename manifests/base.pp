@@ -16,7 +16,16 @@ exec { 'puppet-server':
   path    => '/usr/bin',
 }
 
-service { 'puppetmaster':
+file { '/etc/puppet/fileserver.conf':
   require => Exec['puppet-server'],
+  mode    => 0644,
+  content => '[mount_point]
+  path /etc/puppet/shared
+  allow *
+  ',
+}
+
+service { 'puppetmaster':
+  require => File['/etc/puppet/fileserver.conf'],
   ensure  => running,
 }
