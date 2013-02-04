@@ -4,7 +4,7 @@
 Vagrant::Config.run do |config|
   config.vm.box       = "centos6.3"
   config.vm.box_url   = "http://developer.nrel.gov/downloads/vagrant-boxes/CentOS-6.3-x86_64-v20130101.box"
-  config.vm.host_name = "centos6.3"
+  config.vm.host_name = "vagrant.private"
 
   # Basic manifest to bootstrap
   config.vm.provision :puppet do |puppet|
