@@ -6,7 +6,7 @@ exec { 'epel':
 
 exec { 'puppet':
   require => Exec['epel'],
-  command => 'yum -y downgrade puppet --enablerepo=epel puppet',
+  command => 'yum -y downgrade puppet --enablerepo=epel',
   path    => '/usr/bin',
 }
 
@@ -16,16 +16,33 @@ exec { 'puppet-server':
   path    => '/usr/bin',
 }
 
+file { '/etc/puppet/puppet.conf':
+  require => Exec['puppet-server'],
+  mode    => 0644,
+  content => '[main]
+    manifestdir = $confdir/shared/manifests
+
+    logdir = /var/log/puppet
+    rundir = /var/run/puppet
+[agent]
+    classfile = $vardir/classes.txt
+    localconfig = $vardir/localconfig
+  ',
+}
+
 file { '/etc/puppet/fileserver.conf':
   require => Exec['puppet-server'],
   mode    => 0644,
   content => '[mount_point]
-  path /etc/puppet/shared
-  allow *
+    path /etc/puppet/shared
+    allow *
   ',
 }
 
 service { 'puppetmaster':
-  require => File['/etc/puppet/fileserver.conf'],
+  require => [
+    File['/etc/puppet/puppet.conf'],
+    File['/etc/puppet/fileserver.conf'],
+  ],
   ensure  => running,
 }

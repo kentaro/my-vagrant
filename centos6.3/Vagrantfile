@@ -8,10 +8,10 @@ Vagrant::Config.run do |config|
 
   # Basic manifest to bootstrap
   config.vm.provision :puppet do |puppet|
-    puppet.manifests_path = "../manifests"
-    puppet.manifest_file  = "base.pp"
-    puppet.module_path    = "../manifests/modules"
-    # puppet.options        = %w[ --libdir=\\$modulepath/rbenv/lib ]
+    puppet.manifests_path = "../puppet/manifests"
+    puppet.manifest_file  = "site.pp"
+    puppet.module_path    = "../puppet/modules"
+    puppet.options        = %w[ --verbose --debug ]
   end
 
   # Path to puppet manifests
