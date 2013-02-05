@@ -2,11 +2,11 @@
 
 なんかいろいろ試してみたいとかそういう時にちゃちゃっと環境を作るためのものです。
 
-# 使い方
+## 使い方
 
 いまんとこ、puppetマニフェストの実験台に使うためのあれこれのみ整備してます。
 
-## puppetマニフェストを準備する
+### puppetマニフェストを準備する
 
 以下のように、my-vagrantと同じ階層に、puppetマニフェストが起かれているとしましょう。
 
@@ -32,7 +32,7 @@ vagrant-puppet/ -> ../my-puppet
 
 このvagrant-puppetディレクトリが、Vagrant上で/etc/vagrant/sharedとしてマウントされます。
 
-## Vagrantを起動する
+### Vagrantを起動する
 
 いまのところCentOS6.3のみ用意しています。
 
@@ -49,7 +49,7 @@ vagrant upすると、CentOS6.3のboxを自動的に取得して、起動しま�
   * puppet-server
   * redhat-lsb
 
-## Puppetマニフェストを適用する
+### Puppetマニフェストを適用する
 
 上記のようにしてVagrantを起動すると、puppetmasterdが適切設定された上で動いている状態になっているはずです。
 
@@ -63,13 +63,13 @@ vagrant upすると、CentOS6.3のboxを自動的に取得して、起動しま�
 $ sudo puppet agent --test --server vagrant.private
 ```
 
-# トラブルシュート
+## トラブルシュート
 
-## Puppetまわりでなんかおかしなことがあったら
+### Puppetまわりでなんかおかしなことがあったら
 
 お近くのpuppetマスターにおたずねください。
 
-## /etc/puppet/shareがマウントされない
+### /etc/puppet/shareがマウントされない
 
 以下のようなメッセージがでて、マウントできないことがあるようです。
 
