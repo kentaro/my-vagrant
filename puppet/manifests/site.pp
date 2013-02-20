@@ -45,7 +45,10 @@ file { '/etc/puppet/puppet.conf':
     manifestdir = $confdir/shared/manifests
     modulepath  = $confdir/shared/modules:$vardir/modules
     templatedir = $confdir/shared/templates
-  ',
+
+    node_terminus = exec
+    external_nodes = /usr/local/bin/puppet_external_node
+',
 }
 
 file { '/etc/puppet/fileserver.conf':
@@ -55,6 +58,34 @@ file { '/etc/puppet/fileserver.conf':
     path /etc/puppet/shared/dist
     allow *
   ',
+}
+
+file { '/home/vagrant/.puppet-classes':
+  mode    => 0644,
+  content => '
+---
+classes:
+  - base
+',
+}
+
+file { '/usr/local/bin/puppet_external_node':
+  mode    => 0755,
+  content => '#!/usr/bin/env ruby
+require "yaml"
+
+data = YAML.load_file("/home/vagrant/.puppet-classes")
+info = {
+  "classes"     => data["classes"],
+  "environment" => "development",
+  "parameters"  => {
+    "myclasses"    => data["classes"],
+    "puppetserver" => "vagrant.private"
+  },
+}
+
+puts YAML.dump(info)
+'
 }
 
 service { 'puppetmaster':
