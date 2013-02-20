@@ -8,7 +8,7 @@
 
 ### puppetマニフェストを準備する
 
-以下のように、my-vagrantと同じ階層に、puppetマニフェストが起かれているとしましょう。
+以下のように、my-vagrantと同じ階層に、puppetマニフェストが置かれているとしましょう。
 
 ```
 my-vagrant/
